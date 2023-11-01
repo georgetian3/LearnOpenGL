@@ -344,12 +344,12 @@ int main()
 		glm::mat3 normalMatrix = glm::mat3(model);
 		shaderLTC.setMat4("model", model);
 		shaderLTC.setMat3("normalMatrix", normalMatrix);
-		glm::mat4 view = camera.GetViewMatrix();
+		glm::mat4 view = camera.getViewMatrix();
 		shaderLTC.setMat4("view", view);
 		glm::mat4 projection = glm::perspective(
-			glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
+			glm::radians(camera.zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
 		shaderLTC.setMat4("projection", projection);
-		shaderLTC.setVec3("viewPosition", camera.Position);
+		shaderLTC.setVec3("viewPosition", camera.position);
 		shaderLTC.setVec3("areaLightTranslate", areaLightTranslate);
 
 		glActiveTexture(GL_TEXTURE0);
@@ -390,16 +390,16 @@ void do_movement(GLfloat deltaTime)
 	float cameraSpeed = deltaTime * 3.0f;
 
     if(keys[GLFW_KEY_W]) {
-        camera.ProcessKeyboard(FORWARD, cameraSpeed);
+        camera.processKeyboard(FORWARD, cameraSpeed);
     }
     else if(keys[GLFW_KEY_S]) {
-        camera.ProcessKeyboard(BACKWARD, cameraSpeed);
+        camera.processKeyboard(BACKWARD, cameraSpeed);
     }
     if(keys[GLFW_KEY_A]) {
-        camera.ProcessKeyboard(LEFT, cameraSpeed);
+        camera.processKeyboard(LEFT, cameraSpeed);
     }
     else if(keys[GLFW_KEY_D]) {
-        camera.ProcessKeyboard(RIGHT, cameraSpeed);
+        camera.processKeyboard(RIGHT, cameraSpeed);
     }
 
     if (keys[GLFW_KEY_R]) {
@@ -495,14 +495,14 @@ void mouse_callback(GLFWwindow* window, double xposIn, double yposIn)
     lastX = xpos;
     lastY = ypos;
 
-    camera.ProcessMouseMovement(xoffset, yoffset);
+    camera.processMouseMovement(xoffset, yoffset);
 }
 
 // glfw: whenever the mouse scroll wheel scrolls, this callback is called
 // ----------------------------------------------------------------------
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
 {
-    camera.ProcessMouseScroll(static_cast<float>(yoffset));
+    camera.processMouseScroll(static_cast<float>(yoffset));
 }
 
 // utility function for loading a 2D texture from file
